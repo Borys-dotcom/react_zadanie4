@@ -1,0 +1,16 @@
+.navigationList {
+    max-width: 600px;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0 auto;
+    padding: 12px 24px;
+}
+
+.navigationList li a {
+    text-decoration: none;
+}
+
+.navigationList li a:hover {
+    text-decoration: underline;
+}

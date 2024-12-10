@@ -1,0 +1,21 @@
+.postContainer{
+    max-width: 600px;
+    margin: auto;
+}
+
+.home .btn {
+    margin: 24px 0px;
+}
+
+.postAdd {
+    max-width: 600px;
+    border: 1px solid black;
+    margin: auto;
+    border-radius: 6px;
+    padding: 0 12px;
+}
+
+.postAddForm input {
+    width: 100%;
+    margin-top: 12px;
+}

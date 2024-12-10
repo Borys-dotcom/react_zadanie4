@@ -1,0 +1,46 @@
+.post {
+    display: flex;
+    border: 1px solid black;
+    margin: 6px auto;
+    border-radius: 6px;
+}
+
+.post > * {
+    padding: 5px;
+}
+
+.post .avatar img {
+    height: 50px;
+    border-radius: 50%;
+}
+
+.post .postData {
+    width: 100%;
+}
+
+.post .postData .postMeta {
+    display: flex;
+    padding: 6px;
+    justify-content: space-between;
+}
+
+.post .postData .postMeta .author {
+    font-weight: 700px;
+}
+
+.post .postData .postContent {
+    text-align: left;
+    padding: 6px;
+}
+
+.post .likes {
+    text-align: right;
+}
+
+.post .postData .btnContainer {
+    text-align: right;
+}
+
+.post .postData .btnContainer button {
+    display: inline-block;
+}

@@ -1,0 +1,26 @@
+.formContainer {
+    max-width: 600px;
+    padding: 6px;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.formContainer .signUpForm {
+    text-align: left;
+}
+
+.formContainer .signUpForm input {
+    display: block;
+    width: 100%;
+    margin: 6px auto;
+}
+
+.formContainer .signUpForm button {
+    margin: 0px auto;
+    margin-top: 6px;
+    display: block;
+}
+
+.errorMessage {
+    color: red;
+}
