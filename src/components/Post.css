@@ -1,4 +1,5 @@
 .post {
+    position: relative;
     display: flex;
     border: 1px solid black;
     margin: 6px auto;
@@ -43,4 +44,42 @@
 
 .post .postData .btnContainer button {
     display: inline-block;
+}
+
+.modalMessage {
+    width: 300px;
+    height: 125px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    background-color: white;
+    z-index: 50;
+}
+
+.yes {
+    background-color: green;
+}
+
+.no {
+    background-color: red;
+}
+
+.modalMessage .yes,
+.modalMessage .no {
+    display: inline-block;
+    margin: 0 6px;
+}
+
+.likeDislike .likeDislikeBtnContainer .btn,
+.likeDislike .likeDislikeBtnContainer .btn{
+    display: inline;
+    margin: 0;
+}
+
+.likeDislike {
+    display: flex;
+    justify-content: end;
+    gap:12px
 }
