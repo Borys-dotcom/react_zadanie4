@@ -49,7 +49,7 @@ const Post = (props) => {
         .then((res) => {
             console.log(res);
             props.getLatestPosts();
-            props.getRecommendedUsersData();
+            // props.getRecommendedUsersData();
         })
         .catch((err) => {
             console.error(err);
