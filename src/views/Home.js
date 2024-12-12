@@ -95,8 +95,8 @@ const Home = (props) => {
     return (
         <div className='home'>
             {/* {props.user && <Recommendations getLatestPosts={getLatestPosts} getRecommendedUsersData={getRecommendedUsersData} recommendedUsers={recommendedUsers}/>} */}
-            {props.user && <Recommendations getLatestPosts={getLatestPosts} displayablePosts={displayablePosts}/>}
             {props.user && <AddPost getPrevPosts={getPrevPosts} />}
+            {props.user && <Recommendations getLatestPosts={getLatestPosts} displayablePosts={displayablePosts}/>}
             <div className="postContainer">
                 {displayablePosts.map((post) => {
                     // return <Post post={post} user={props.user} key={post.id} followedUsers={followedUsers} deletePost={deletePost} getLatestPosts={getLatestPosts} getRecommendedUsersData={getRecommendedUsersData}/>

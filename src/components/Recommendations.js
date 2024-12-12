@@ -25,9 +25,8 @@ const Recommendations = (props) => {
             "leader_id": id
         })
         .then((res) => {
-            getRecommendedUsersData();
+            // getRecommendedUsersData();
             props.getLatestPosts();
-            console.log(res)
         })
         .catch((err) => {
             console.error(err);
