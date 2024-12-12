@@ -23,8 +23,6 @@ const Login = (props) => {
         axios.post('https://akademia108.pl/api/social-app/user/login', formData)
             .then((res) => {
 
-                console.log(res);
-
                 if (Array.isArray(res.data.username)) {
                     setLoginMessage(res.data.username[0]);
                 } else if (Array.isArray(res.data.password)) {

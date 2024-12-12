@@ -1,6 +1,7 @@
 import axios from 'axios';
 import './SignUp.css';
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 const SignUp = () => {
 
@@ -10,6 +11,8 @@ const SignUp = () => {
         password: '',
         passwordRepeated: ''
     });
+    const [loginMessage, setLoginMessage] = useState([]);
+    const [rerouteAfterSuccess, setRerouteAfterSuccess] = useState(false)
 
     const [errorMessage, setErrorMessage] = useState([]);
     const [possibleToSubmit, setPossibleToSubmit] = useState(true);
@@ -87,10 +90,17 @@ const SignUp = () => {
         }
 
         if (possibleToSubmit) {
-            setFormData(delete formData.passwordRepeated);
-            axios.post('https://akademia108.pl/api/social-app/user/signup', formData)
+            let submitData = { ...formData };
+            delete submitData.passwordRepeated;
+            axios.post('https://akademia108.pl/api/social-app/user/signup', submitData)
                 .then((res) => {
-                    console.log(res);
+                    setLoginMessage('Dodano nowego użytkownika.');
+                    setTimeout(
+                        clearLoginMessage
+                    , 2000)
+                    if (res.data.signedup) {
+                        return setFormData((prevData) => {return { ...prevData, username: '', email: '', password: '', passwordRepeated: '' }});
+                    }
                 })
                 .catch((err) => {
                     console.log(err);
@@ -98,8 +108,14 @@ const SignUp = () => {
         }
     }
 
+    const clearLoginMessage = () => {
+        setLoginMessage('');
+        setRerouteAfterSuccess(true);
+    }
+
     return (
         <div className='formContainer'>
+            {rerouteAfterSuccess && <Navigate to='/login' />}
             <h2 className='signUpHeader'>Sign up form</h2>
             <form className='signUpForm' onChange={updateFormData} onSubmit={submitData} noValidate>
                 <label htmlFor='userName'>Nazwa użytkownika:</label>
@@ -115,6 +131,7 @@ const SignUp = () => {
             {errorMessage.map((message, index) => {
                 return <p className='errorMessage' key={index}>{message}</p>
             })}
+            <p className='loginMessage'>{loginMessage}</p>
         </div>
     )
 }

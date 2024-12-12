@@ -1,0 +1,26 @@
+.recommendations {
+    display: flex;
+    max-width: 600px;
+    border: 1px solid black;
+    border-radius: 6px;
+    margin: 6px auto;
+    justify-content: space-around;
+    padding: 12px;
+}
+
+.recommendations .recommendedUser {
+    width: 20%;
+}
+
+.recommendations .recommendedUser .btn {
+    margin: 6px auto 0;
+}
+
+.recommendations .recommendedUser .imageHolder h3 {
+    margin: 6px 0;
+}
+
+.recommendations .recommendedUser .imageHolder img {
+    border-radius: 50%;
+    width: 100px;
+}
