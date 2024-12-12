@@ -15,7 +15,7 @@ const SignUp = () => {
     const [rerouteAfterSuccess, setRerouteAfterSuccess] = useState(false)
 
     const [errorMessage, setErrorMessage] = useState([]);
-    const [possibleToSubmit, setPossibleToSubmit] = useState(true);
+    // const [possibleToSubmit, setPossibleToSubmit] = useState(true);
     const regExUsername = /^[^\s]*$/;
     const regExEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     const regExSpecialChar = /[!#@$%]+/;
@@ -33,57 +33,57 @@ const SignUp = () => {
     const submitData = (e) => {
         e.preventDefault();
         setErrorMessage([]);
-        setPossibleToSubmit(true);
+        let possibleToSubmit = true;
 
         if (formData.username.length < 4) {
-            setPossibleToSubmit(false);
+            possibleToSubmit = false;
             setErrorMessage((prevMessage) => {
                 return prevMessage.concat('Nazwa użytkownika musi składać się z przynajmniej 4 znaków.');
             });
         }
 
-        if (!regExUsername.test(formData.username)) {
-            setPossibleToSubmit(false);
+        if (!regExUsername.test(formData.username.trim())) {
+            possibleToSubmit = false;
             setErrorMessage((prevMessage) => {
                 return prevMessage.concat('W polu nazwa użytkownika znajduje się pusty znak.');
             });
         }
 
         if (!regExEmail.test(formData.email)) {
-            setPossibleToSubmit(false);
+            possibleToSubmit = false;
             setErrorMessage((prevMessage) => {
                 return prevMessage.concat('Email nie jest poprawny.');
             });
         }
 
         if ((formData.password.length > 5) && (!regExSpecialChar.test(formData.password))) {
-            setPossibleToSubmit(false);
+            possibleToSubmit = false;
             setErrorMessage((prevMessage) => {
                 return prevMessage.concat('Hasło powinno zawierać przynajmniej jeden znak specjalny.');
             });
         }
 
         if ((formData.password.length > 5) && (!regExNumber.test(formData.password))) {
-            setPossibleToSubmit(false);
+            possibleToSubmit = false;
             setErrorMessage((prevMessage) => {
                 return prevMessage.concat('Hasło powinno zawierać przynajmniej jedeą cyfrę.');
             });
         }
 
         if (formData.password === '') {
-            setPossibleToSubmit(false);
+            possibleToSubmit = false;
             setErrorMessage((prevMessage) => {
                 return prevMessage.concat('Wpisz hasło.');
             });
         } else if (formData.password.length < 6) {
-            setPossibleToSubmit(false);
+            possibleToSubmit = false;
             setErrorMessage((prevMessage) => {
                 return prevMessage.concat('Hasło powinno posiadać przynajmniej 6 znaków.');
             });
         }
 
         if (formData.password !== formData.passwordRepeated) {
-            setPossibleToSubmit(false);
+            possibleToSubmit = false;
             setErrorMessage((prevMessage) => {
                 return prevMessage.concat('Powtórzone hasło się nie zgadza.');
             });
@@ -94,12 +94,15 @@ const SignUp = () => {
             delete submitData.passwordRepeated;
             axios.post('https://akademia108.pl/api/social-app/user/signup', submitData)
                 .then((res) => {
-                    setLoginMessage('Dodano nowego użytkownika.');
-                    setTimeout(
-                        clearLoginMessage
-                    , 2000)
                     if (res.data.signedup) {
-                        return setFormData((prevData) => {return { ...prevData, username: '', email: '', password: '', passwordRepeated: '' }});
+                        setLoginMessage('Dodano nowego użytkownika: ' + res.data.user.username);
+                        setTimeout(
+                            clearLoginMessage
+                            , 2000)
+                        return setFormData((prevData) => { return { ...prevData, username: '', email: '', password: '', passwordRepeated: '' } });
+                    } else {
+                        console.log(res)
+                        setLoginMessage(res.data.message.username || res.data.message.email);
                     }
                 })
                 .catch((err) => {
